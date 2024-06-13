@@ -3,7 +3,7 @@ import axios from "axios";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 
-const Register = ({ setIsLogin, setGlobalUsername }) => {
+const Register = ({ setIsLogin, setGlobalUsername, setProfile }) => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRePassword] = useState("");
@@ -34,6 +34,7 @@ const Register = ({ setIsLogin, setGlobalUsername }) => {
         console.log(res.data);
 
         setGlobalUsername(res.data.username);
+        setProfile("");
 
         enqueueSnackbar("Registered", {
           variant: "success",

@@ -10,6 +10,12 @@ const UsernameSchema = new mongoose.Schema({
   username: {
     type: String,
   },
+  profile: {
+    type: String,
+  },
+  chats: {
+    type: [String],
+  },
 });
 
 const Usernames = mongoose.model("Users", UsernameSchema);

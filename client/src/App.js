@@ -5,6 +5,7 @@ import Chat from "./components/Chat.jsx";
 
 const App = () => {
   const [globalUsername, setGlobalUsername] = useState("");
+  const [profile, setProfile] = useState("");
 
   return (
     <Router>
@@ -15,6 +16,8 @@ const App = () => {
             <Home
               globalUsername={globalUsername}
               setGlobalUsername={setGlobalUsername}
+              profile={profile}
+              setProfile={setProfile}
             />
           }
         />
@@ -24,6 +27,8 @@ const App = () => {
             <Chat
               globalUsername={globalUsername}
               setGlobalUsername={setGlobalUsername}
+              profile={profile}
+              setProfile={setProfile}
             />
           }
         />

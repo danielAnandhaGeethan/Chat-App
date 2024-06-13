@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import background from "../assets/background.jpg";
 
-const Chat = ({ globalUsername, setGlobalUsername }) => {
+const Chat = ({ globalUsername, setGlobalUsername, profile, setProfile }) => {
   return (
     <div
       style={{
@@ -16,6 +16,8 @@ const Chat = ({ globalUsername, setGlobalUsername }) => {
           isChatPage={true}
           globalUsername={globalUsername}
           setGlobalUsername={setGlobalUsername}
+          profile={profile}
+          setProfile={setProfile}
         />
       </div>
     </div>

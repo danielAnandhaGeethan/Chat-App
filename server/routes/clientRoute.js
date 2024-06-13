@@ -60,4 +60,24 @@ router.post("/users/:data", async (req, res) => {
   }
 });
 
+router.put("/users/:username/:profile", async (req, res) => {
+  try {
+    const { username, profile } = req.params;
+
+    const updatedUsers = await Users.findOneAndReplace(
+      { username: username },
+      { $set: { profile: profile } },
+      { new: true }
+    );
+
+    if (updatedUsers) {
+      return res.status(200).send({ message: "Done" });
+    } else {
+      return res.status(400).send({ message: "No such user" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;

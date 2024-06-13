@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Login from "./Login";
 import Register from "./Register";
 
-const Home = ({ globalUsername, setGlobalUsername }) => {
+const Home = ({ globalUsername, setGlobalUsername, profile, setProfile }) => {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
@@ -20,17 +20,21 @@ const Home = ({ globalUsername, setGlobalUsername }) => {
           isChatPage={false}
           globalUsername={globalUsername}
           setGlobalUsername={setGlobalUsername}
+          profile={profile}
+          setProfile={setProfile}
         />
         <div className="bg-black/60 h-[65%] w-[60%] md:w-[36%] lg:w-[23%] mt-20 rounded-xl shadow-xl">
           {isLogin ? (
             <Login
               setIsLogin={setIsLogin}
               setGlobalUsername={setGlobalUsername}
+              setProfile={setProfile}
             />
           ) : (
             <Register
               setIsLogin={setIsLogin}
               setGlobalUsername={setGlobalUsername}
+              setProfile={setProfile}
             />
           )}
         </div>
