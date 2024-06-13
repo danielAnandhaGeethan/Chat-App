@@ -2,7 +2,7 @@ const express = require("express");
 const Users = require("../models/userName");
 const router = express.Router();
 
-router.get("/clients/:username/:password", async (req, res) => {
+router.get("/users/:username/:password", async (req, res) => {
   try {
     const { username, password } = req.params;
 
@@ -23,7 +23,7 @@ router.get("/clients/:username/:password", async (req, res) => {
   }
 });
 
-router.post("/usernames/:data", async (req, res) => {
+router.post("/users/:data", async (req, res) => {
   try {
     const data = req.params.data.split(",");
 
@@ -40,28 +40,20 @@ router.post("/usernames/:data", async (req, res) => {
       });
     }
 
-    collection
-      .find()
-      .sort({ _id: -1 })
-      .limit(1)
-      .toArray(async (err, documents) => {
-        if (err) {
-          console.error(err);
-        } else {
-          const newClient = {
-            identifier: identifier,
-            password: password,
-            username:
-              documents.length > 0
-                ? "Alpha-" +
-                  (parseInt(documents[0].split("-")[1]) + 1).toString()
-                : "Alpha-" + "1001",
-          };
+    const latestUser = await Users.find().sort({ _id: -1 }).limit(1);
 
-          const user = await Users.create(newClient);
-          return res.status(201).json(user);
-        }
-      });
+    const newClient = {
+      identifier: identifier,
+      password: password,
+      username:
+        latestUser.length > 0
+          ? "Alpha-" +
+            (parseInt(latestUser[0].username.split("-")[1]) + 1).toString()
+          : "Alpha-" + "1001",
+    };
+
+    const user = await Users.create(newClient);
+    return res.status(201).json(user);
   } catch (error) {
     console.error("Error creating usernames:", error);
     res.status(500).send({ error: "Failed to create usernames" });
